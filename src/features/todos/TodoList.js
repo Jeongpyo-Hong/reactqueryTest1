@@ -13,7 +13,10 @@ const TodoList = () => {
     isError,
     error,
     data: todos,
-  } = useQuery("todos", getTodos);
+  } = useQuery("todos", getTodos, {
+    // 데이터를 역순으로 넣기
+    select: (data) => data.sort((a, b) => b.id - a.id),
+  });
 
   const addTodoMutation = useMutation(addTodo, {
     onSuccess: () => {
